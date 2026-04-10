@@ -1,0 +1,35 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: resume-db
+    environment:
+      MYSQL_DATABASE: resume_analyzer
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost", "-u", "root", "-ppassword"]
+      timeout: 20s
+      retries: 10
+
+  backend:
+    build: ./backend
+    container_name: resume-backend
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/resume_analyzer?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=password
+      - SPRING_AI_OPENAI_API_KEY=${GROQ_API_KEY}
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    build: ./frontend
+    container_name: resume-frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend

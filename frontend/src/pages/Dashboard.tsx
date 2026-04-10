@@ -96,13 +96,26 @@ const Dashboard = () => {
                     <p className="text-foreground/60">Comprehensive feedback for {safeStr(resume?.candidateName)}</p>
                 </div>
                 <div className="flex gap-4">
-                    <button className="flex items-center gap-2 px-6 py-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl transition-all">
+                    <button 
+                        onClick={() => {
+                            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+                            const url = URL.createObjectURL(blob);
+                            const a = document.createElement('a');
+                            a.href = url;
+                            a.download = `Analysis_${resume?.candidateName || 'Report'}.json`;
+                            a.click();
+                        }}
+                        className="flex items-center gap-2 px-6 py-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl transition-all"
+                    >
                         <Download className="w-4 h-4" />
-                        <span>Export</span>
+                        <span>Export JSON</span>
                     </button>
-                    <button className="flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-2xl shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all font-bold">
+                    <button 
+                        onClick={() => window.print()}
+                        className="flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-2xl shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all font-bold"
+                    >
                         <Trophy className="w-4 h-4" />
-                        <span>Apply Now</span>
+                        <span>Print Report</span>
                     </button>
                 </div>
             </div>

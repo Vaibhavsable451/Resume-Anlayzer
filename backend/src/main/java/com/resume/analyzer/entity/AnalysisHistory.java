@@ -15,7 +15,7 @@ public class AnalysisHistory {
     private String jobTitle;
     private int overallScore;
     
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "LONGTEXT")
     private String analysisResultJson;
     
     private LocalDateTime createdAt = LocalDateTime.now();

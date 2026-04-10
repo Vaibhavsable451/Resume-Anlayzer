@@ -1,0 +1,24 @@
+# Node.js
+node_modules/
+dist/
+.DS_Store
+.env
+.env.local
+*.log
+
+# Maven
+target/
+*.class
+.mvn/
+mvnw
+mvnw.cmd
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.iml
+
+# OS
+Thumbs.db
+Desktop.ini

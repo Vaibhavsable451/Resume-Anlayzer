@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { LogIn, Mail, Lock, Sparkles, ArrowRight } from 'lucide-react';
-import axios from 'axios';
+import api from '../utils/api';
 import { motion } from 'framer-motion';
 
 const LoginPage = () => {
@@ -15,7 +15,7 @@ const LoginPage = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/api/auth/login', { email, password });
+      const response = await api.post('/api/auth/login', { email, password });
       login(response.data);
       navigate('/');
     } catch (err: any) {

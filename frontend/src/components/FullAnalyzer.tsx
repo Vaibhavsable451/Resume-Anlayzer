@@ -1,13 +1,8 @@
 import { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Upload, FileText, ChevronRight, Zap, Target, Sparkles } from 'lucide-react';
+import api from '../utils/api';
 import { motion } from 'framer-motion';
-
-const api = axios.create({
-    baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080',
-    withCredentials: true
-});
 
 const FullAnalyzer = () => {
     const [file, setFile] = useState<File | null>(null);

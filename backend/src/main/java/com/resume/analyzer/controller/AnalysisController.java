@@ -22,7 +22,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/analyze")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {"http://localhost:5173", "https://resume-anlayzer.onrender.com"})
 public class AnalysisController {
 
     private final ExtractionService extractionService;

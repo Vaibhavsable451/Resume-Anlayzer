@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import { 
   History, 
   Calendar, 
@@ -12,7 +10,9 @@ import {
   FilterX,
   Trash2
 } from 'lucide-react';
+import api from '../utils/api';
 import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 interface HistoryRecord {
   id: number;
@@ -41,7 +41,7 @@ const HistoryPage = () => {
 
         const fetchHistory = async () => {
             try {
-                const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080'}/api/analyze/history`, {
+                const response = await api.get('/api/analyze/history', {
                     headers: { Authorization: `Bearer ${user.token}` }
                 });
                 setHistory(Array.isArray(response.data) ? response.data : []);
@@ -60,7 +60,7 @@ const HistoryPage = () => {
         if (!window.confirm("Are you sure you want to delete this scan permanently?")) return;
 
         try {
-            await axios.delete(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080'}/api/analyze/history/${id}`, {
+            await api.delete(`/api/analyze/history/${id}`, {
                 headers: { Authorization: `Bearer ${user?.token}` }
             });
             setHistory(prev => prev.filter(h => h.id !== id));

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { UserPlus, Mail, Lock, User as UserIcon, ArrowRight, Sparkles } from 'lucide-react';
-import axios from 'axios';
+import api from '../utils/api';
 import { motion } from 'framer-motion';
 
 const RegisterPage = () => {
@@ -15,7 +15,7 @@ const RegisterPage = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await axios.post('/api/auth/register', { email, password, fullName });
+      await api.post('/api/auth/register', { email, password, fullName });
       setSuccess(true);
       setTimeout(() => navigate('/login'), 2000);
     } catch (err: any) {

@@ -1,13 +1,8 @@
 import { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import api from '../utils/api';
 import { Upload, FileText, CheckCircle2, ChevronRight, Zap } from 'lucide-react';
 import { motion } from 'framer-motion';
-
-const api = axios.create({
-    baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080',
-    withCredentials: true
-});
 
 const AtsChecker = () => {
     const [file, setFile] = useState<File | null>(null);

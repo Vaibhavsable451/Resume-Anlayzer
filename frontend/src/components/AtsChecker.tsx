@@ -5,7 +5,7 @@ import { Upload, FileText, CheckCircle2, ChevronRight, Zap } from 'lucide-react'
 import { motion } from 'framer-motion';
 
 const api = axios.create({
-    baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8080',
+    baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080',
     withCredentials: true
 });
 

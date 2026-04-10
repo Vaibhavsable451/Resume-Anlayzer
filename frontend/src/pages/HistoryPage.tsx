@@ -41,7 +41,7 @@ const HistoryPage = () => {
 
         const fetchHistory = async () => {
             try {
-                const response = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:8080'}/api/analyze/history`, {
+                const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080'}/api/analyze/history`, {
                     headers: { Authorization: `Bearer ${user.token}` }
                 });
                 setHistory(Array.isArray(response.data) ? response.data : []);
@@ -60,7 +60,7 @@ const HistoryPage = () => {
         if (!window.confirm("Are you sure you want to delete this scan permanently?")) return;
 
         try {
-            await axios.delete(`${import.meta.env.VITE_API_URL || 'http://localhost:8080'}/api/analyze/history/${id}`, {
+            await axios.delete(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080'}/api/analyze/history/${id}`, {
                 headers: { Authorization: `Bearer ${user?.token}` }
             });
             setHistory(prev => prev.filter(h => h.id !== id));
